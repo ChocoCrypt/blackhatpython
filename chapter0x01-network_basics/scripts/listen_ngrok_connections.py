@@ -9,10 +9,11 @@ import datetime
 
 
 ip = "0.0.0.0"
-port  = sys.argv[1]
+port  = int(sys.argv[1])
 
 # Defino mi servidor
 server = socket.socket(socket.AF_INET , socket.SOCK_STREAM)
+server.bind((ip,port))
 server.listen(5)
 print(f"listening on {port}")
 
@@ -21,9 +22,9 @@ print(f"listening on {port}")
 def manejar_requets(client_socket):
 
     request = client_socket.recv(2048)
-    print(f"llegó {requets}")
+    print(f"llegó {request}")
     # Contesto
-    client_socket.send(f"Buena papi esto lo guardaré!")
+    client_socket.send(b"Buena papi esto lo guardare")
     fecha = str(datetime.datetime.now()).replace(" ","")
     with open(f"{fecha}.req","w") as fp:
         data = str(request)
@@ -33,7 +34,6 @@ def manejar_requets(client_socket):
 
 if __name__ == "__main__":
     while(True):
-        print("listening...")
         client, addr = server.accept()
         print(f"llegó un request desde {addr}")
         client_handler = threading.Thread(target= manejar_requets , args =(client,))
