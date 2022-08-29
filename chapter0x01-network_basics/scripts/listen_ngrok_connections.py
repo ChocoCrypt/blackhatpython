@@ -20,13 +20,12 @@ print(f"listening on {port}")
 
 
 def manejar_requets(client_socket):
-
     request = client_socket.recv(2048)
     print(f"llegó {request}")
     # Contesto
     client_socket.send(b"Buena papi esto lo guardare")
     fecha = str(datetime.datetime.now()).replace(" ","")
-    with open(f"{fecha}.req","w") as fp:
+    with open(f"paquetes/{fecha}.req","w") as fp:
         data = str(request)
         fp.write(data)
     client_socket.close()
