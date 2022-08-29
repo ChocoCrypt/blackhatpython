@@ -5,4 +5,4 @@ def packet_callback(packet):
     print(packet.show())
 
 
-sniff(prn=packet_callback , count=5)
+sniff(prn=packet_callback )
