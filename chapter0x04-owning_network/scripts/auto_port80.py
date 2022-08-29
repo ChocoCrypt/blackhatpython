@@ -10,6 +10,7 @@ def grab_requests(packet):
     try:
         dns = socket.gethostbyaddr(dest)
         print(f'{source} -> {dest} | {dns} ')
+        print(packet.payload)
     except:
         pass
     
